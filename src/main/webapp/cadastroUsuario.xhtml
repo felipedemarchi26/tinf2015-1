@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/templates/default.xhtml">
+	
+		<ui:define name="title">Cadastro de Usuários</ui:define>
+		<ui:define name="content">
+			<h1 class="titulo">Cadastro de Usuários</h1>
+			
+			<p:messages />
+			
+			<h:form styleClass="formulario" id="form">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+						<div class="form-group">
+							<p:outputLabel for="nome-id" value="Nome Completo"/>
+							<p:inputText styleClass="form-control" id="nome-id" required="true" requiredMessage="O nome é obrigatório!" value="#{usuarioMB.usuario.nome}" maxlength="100" placeholder="Digite seu nome aqui!"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="nascimento-id" value="Data de Nascimento"/>
+							<p:calendar styleClass="form-control" id="nascimento-id" required="true" requiredMessage="A data de nascimento é obrigatória!" value="#{usuarioMB.usuario.nascimento}" converterMessage="Formato de data inválido!" pattern="dd/MM/yyyy" mask="true"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="cpf-id" value="CPF"/>
+							<p:inputMask styleClass="form-control" id="cpf-id" required="true" requiredMessage="O CPF é obrigatório!" value="#{usuarioMB.usuario.cpf}" mask="999.999.999-99"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="rg-id" value="RG"/>
+							<p:inputText styleClass="form-control" id="rg-id" required="true" requiredMessage="O RG é obrigatório!" value="#{usuarioMB.usuario.rg}" maxlength="10"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="telefone-id" value="Telefone"/>
+							<p:inputMask styleClass="form-control" id="telefone-id" required="true" requiredMessage="O telefone é obrigatório!" value="#{usuarioMB.usuario.telefone}" mask="(99)9999-9999?9"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="email-id" value="E-mail"/>
+							<p:inputText styleClass="form-control" id="email-id" required="true" requiredMessage="O e-mail é obrigatório!" value="#{usuarioMB.usuario.email}"/>
+							<p:keyFilter for="email-id" mask="email"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="senha-id" value="Senha"/>
+							<p:password styleClass="form-control" id="senha-id" match="confirmarSenha-id" required="true" requiredMessage="A senha é obrigatória!" value="#{usuarioMB.usuario.senha}" feedback="true" inline="true" validatorMessage="As senhas não conferem!"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="confirmarSenha-id" value="Confirmar Senha"/>
+							<p:password styleClass="form-control" id="confirmarSenha-id" required="true" requiredMessage="O confirmar senha é obrigatório!" value="#{usuarioMB.confirmarSenha}"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+						<div class="form-group">
+							<p:outputLabel for="rua-id" value="Rua"/>
+							<p:inputText styleClass="form-control" id="rua-id" required="true" requiredMessage="A rua é obrigatória!" value="#{usuarioMB.usuario.endereco.rua}"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="numero-id" value="Número"/>
+							<p:inputText styleClass="form-control" id="numero-id" required="true" requiredMessage="O número é obrigatório!" value="#{usuarioMB.usuario.endereco.numero}"/>
+							<p:keyFilter for="numero-id" mask="num"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="complemento-id" value="Complemento"/>
+							<p:inputText styleClass="form-control" id="complemento-id" value="#{usuarioMB.usuario.endereco.complemento}" maxlength="50"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="bairro-id" value="Bairro"/>
+							<p:inputText styleClass="form-control" id="bairro-id" required="true" requiredMessage="O bairro é obrigatório!" value="#{usuarioMB.usuario.endereco.bairro}" maxlength="80"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="cidade-id" value="Cidade"/>
+							<p:inputText styleClass="form-control" id="cidade-id" required="true" requiredMessage="A cidade é obrigatório!" value="#{usuarioMB.usuario.endereco.cidade}" maxlength="80"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="estado-id" value="Estado"/>
+							<p:selectOneMenu id="estado-id" styleClass="form-control" required="true" requiredMessage="O estado é obrigatório!" value="#{usuarioMB.usuario.endereco.estado}"
+											 effect="fade" filter="true" filterMatchMode="startsWith">
+								<f:selectItem itemLabel="Santa Catarina" itemValue="SC"/>
+								<f:selectItem itemLabel="Paraná" itemValue="PR"/>
+								<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS"/>
+								<f:selectItem itemLabel="São Paulo" itemValue="SP"/>
+								<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/>
+								<f:selectItem itemLabel="Minas Gerais" itemValue="MG"/>							
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<div class="form-group">
+							<p:outputLabel for="cep-id" value="CEP"/>
+							<p:inputMask styleClass="form-control" id="cep-id" required="true" requiredMessage="O cep é obrigatório!" value="#{usuarioMB.usuario.endereco.cep}" mask="99999-999"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row botoes">
+					<h:button styleClass="btn btn-default" immediate="true" update="form" value="Limpar" action="#{usuarioMB.limpar}"/>
+					<h:commandButton styleClass="btn btn-success" value="Salvar" action="#{usuarioMB.salvar}"/>
+				</div>
+				
+			</h:form>
+		</ui:define>
+		
+	</ui:composition>
+
+</html>
