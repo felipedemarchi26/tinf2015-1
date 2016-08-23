@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/templates/default.xhtml">
+		<ui:define name="title">Lista de Usuários</ui:define>
+		<ui:define name="content">
+			<h1>Lista de Usuários</h1>
+
+			<h:form id="form">
+
+				<p:messages />
+				
+				<p:dataTable id="tabela-usuarios" value="#{usuarioMB.usuarios}" var="user">
+					<f:facet name="header">
+						Lista de Usuários
+						<p:commandButton action="#{usuarioMB.novo}" icon="ui-icon-note" value="Novo Usuário"/>
+					</f:facet>
+					<p:column headerText="Nome">
+						<h:outputText value="#{user.nome}"/>
+					</p:column>
+					<p:column headerText="CPF">
+						<h:outputText value="#{user.cpf}"/>
+					</p:column>
+					<p:column headerText="E-mail">
+						<h:outputText value="#{user.email}"/>
+					</p:column>
+					<p:column headerText="Endereço">
+						<h:outputText value="#{user.endereco.rua}, #{user.endereco.numero}, #{user.endereco.bairro}, #{user.endereco.cidade}/#{user.endereco.estado}"/>
+					</p:column>
+					<p:column>
+						<p:commandButton action="#{usuarioMB.editar}" icon="ui-icon-pencil" title="Editar">
+							<f:setPropertyActionListener value="#{user}" target="#{usuarioMB.usuario}"></f:setPropertyActionListener>
+						</p:commandButton>
+						<p:commandButton update="tabela-usuarios" action="#{usuarioMB.excluir}" icon="ui-icon-trash" title="Excluir">
+							<f:setPropertyActionListener value="#{user}" target="#{usuarioMB.usuario}"></f:setPropertyActionListener>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+						
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	
+</html>

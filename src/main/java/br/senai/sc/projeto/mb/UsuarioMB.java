@@ -1,18 +1,23 @@
 package br.senai.sc.projeto.mb;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sc.projeto.model.Usuario;
 import br.senai.sc.projeto.rn.UsuarioRN;
 
 @ManagedBean
+@SessionScoped
 public class UsuarioMB {
 
 	private Usuario usuario;
 	private UsuarioRN usuarioRN;
 	private String confirmarSenha;
+	private List<Usuario> usuarios;
 
 	public UsuarioMB() {
 		usuario = new Usuario();
@@ -44,10 +49,23 @@ public class UsuarioMB {
 		this.confirmarSenha = confirmarSenha;
 	}
 
+	public List<Usuario> getUsuarios() {
+		if (usuarios == null) {
+			usuarios = usuarioRN.listarUsuario();
+		}
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	public String salvar() {
-		if (usuario.getSenha().equals(confirmarSenha)) {
+		if (usuario.getId() != 0 || usuario.getSenha().equals(confirmarSenha)) {
 			usuarioRN.salvar(usuario);
 			confirmarSenha = "";
+			usuarios = null;
+			usuario = new Usuario();
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário registrado com sucesso!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		} else {
@@ -63,4 +81,29 @@ public class UsuarioMB {
 		return "";
 	}
 	
+	public String novo() {
+		usuario = new Usuario();
+		return "cadastroUsuario";
+	}
+	
+	public String editar() {
+		return "cadastroUsuario";
+	}
+	
+	public String excluir() {
+		usuarioRN.excluir(usuario);
+		usuarios.remove(usuario);
+		usuario = new Usuario();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário removido com sucesso!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		return null;
+	}
+	
+	public boolean isConfirmarSenhaRenderer() {
+		if (usuario.getId() != 0) {
+			return false;
+		}
+		return true;
+	}
+
 }

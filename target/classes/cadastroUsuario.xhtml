@@ -61,18 +61,20 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<div class="form-group">
-							<p:outputLabel for="senha-id" value="Senha"/>
-							<p:password styleClass="form-control" id="senha-id" match="confirmarSenha-id" required="true" requiredMessage="A senha é obrigatória!" value="#{usuarioMB.usuario.senha}" feedback="true" inline="true" validatorMessage="As senhas não conferem!"/>
+					<h:panelGroup rendered="#{usuarioMB.confirmarSenhaRenderer}">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="senha-id" value="Senha"/>
+								<p:password styleClass="form-control" id="senha-id" match="confirmarSenha-id" required="true" requiredMessage="A senha é obrigatória!" value="#{usuarioMB.usuario.senha}" feedback="true" inline="true" validatorMessage="As senhas não conferem!"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<div class="form-group">
-							<p:outputLabel for="confirmarSenha-id" value="Confirmar Senha"/>
-							<p:password styleClass="form-control" id="confirmarSenha-id" required="true" requiredMessage="O confirmar senha é obrigatório!" value="#{usuarioMB.confirmarSenha}"/>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<div class="form-group">
+								<p:outputLabel for="confirmarSenha-id" value="Confirmar Senha"/>
+								<p:password styleClass="form-control" id="confirmarSenha-id" required="true" requiredMessage="O confirmar senha é obrigatório!" value="#{usuarioMB.confirmarSenha}"/>
+							</div>
 						</div>
-					</div>
+					</h:panelGroup>
 				</div>
 				
 				<div class="row">
@@ -114,7 +116,7 @@
 				
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<div class="form-group">
+						<div class="form-group select-one-menu">
 							<p:outputLabel for="estado-id" value="Estado"/>
 							<p:selectOneMenu id="estado-id" styleClass="form-control" required="true" requiredMessage="O estado é obrigatório!" value="#{usuarioMB.usuario.endereco.estado}"
 											 effect="fade" filter="true" filterMatchMode="startsWith">
