@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+	  <ui:composition template="/resources/templates/default.xhtml">
+	  
+	  	<ui:define name="content">
+	  		<h:form>
+	  	
+	  		<p:dataTable id="tabela-categorias" value="#{categoriaMB.categorias}"
+	  			var="categoria">
+	  			
+	  			<f:facet name="header">
+	  				<p:commandButton action="#{categoriaMB.novo}" value="Nova Categoria"/>
+	  			</f:facet>
+	  			<p:column headerText="Descrição">
+	  				<h:outputText value="#{categoria.descricao}"/>
+	  			</p:column>
+	  			<p:column>
+	  				<p:commandButton action="#{categoriaMB.editar}" 
+	  						icon="ui-icon-pencil" title="Editar">
+	  					<f:setPropertyActionListener value="#{categoria}" target="#{categoriaMB.categoria}"/>		
+	  				</p:commandButton>
+	  				<p:commandButton action="#{categoriaMB.excluir}"
+	  					icon="ui-icon-trash" title="Excluir"
+	  					update="tabela-categorias">
+	  					<f:setPropertyActionListener value="#{categoria}" target="#{categoriaMB.categoria}"/>
+	  				</p:commandButton>
+	  			</p:column>
+	  			
+	  		</p:dataTable>
+	  		</h:form>
+	  	</ui:define>
+	  
+	  </ui:composition>
+
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+	<ui:composition template="/resources/templates/default.xhtml">
+		<ui:define name="content">
+			
+			<p:messages autoUpdate="true"/>
+			
+			<h:form id="formulario">
+			
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="nome-id" value="Nome"/>
+							<p:inputText id="nome-id" styleClass="form-control"
+								value="#{produtoMB.produto.nome}" required="true"
+								requiredMessage="O nome é obrigatório!"
+								maxlength="100"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="descricao-id" value="Descrição"/>
+							<p:inputTextarea id="descricao-id" 
+								styleClass="form-control"
+								value="#{produtoMB.produto.descricao}"
+								counter="display" maxlength="500" 
+								counterTemplate="{0} caracteres restantes!"
+								required="true" requiredMessage="A descrição é obrigatória!"/>
+							<h:outputText id="display"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="preco-id" value="Preço"/>
+							<p:spinner id="preco-id" value="#{produtoMB.produto.preco}"
+								styleClass="form-control"
+								stepFactor="0.05" min="0" prefix="R$"
+								required="true" requiredMessage="O preço é obrigatório!"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<div class="form-group">
+							<p:outputLabel for="categoria-id" value="Categoria"/>
+							<p:autoComplete id="categoria-id" styleClass="form-control"
+							value="#{produtoMB.produto.categoria}" 
+							completeMethod="#{produtoMB.completeCategorias}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria}" forceSelection="true"
+							minQueryLength="3" queryDelay="1000" effect="blind"
+							required="true"
+							requiredMessage="A categoria é obrigatória!"/>
+						</div>
+					</div>
+				</div>
+			
+				<div class="row botoes">
+					<p:commandButton value="Salvar" action="#{produtoMB.salvar}"
+						styleClass="btn btn-default" update="formulario"/>
+				</div>
+			</h:form>
+			
+		</ui:define>
+	</ui:composition>
+	  
+</html>
