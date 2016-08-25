@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/templates/default.xhtml">
+		<ui:define name="content">
+			
+			<p:messages autoUpdate="true"/>
+			
+			<h:form id="formulario">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="descricao-id" value="Descrição"/>
+							<p:inputText styleClass="form-control" id="descricao-id" 
+								value="#{categoriaMB.categoria.descricao}" maxlength="100"
+								required="true" requiredMessage="A descrição é obrigatória!"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row botoes">
+					<p:commandButton value="Voltar" immediate="true" 
+						action="#{categoriaMB.listar}" styleClass="btn btn-default"/>
+					<p:commandButton value="Salvar" action="#{categoriaMB.salvar}"
+						styleClass="btn btn-default" update="formulario"/>
+				</div>
+			</h:form>
+			
+		</ui:define>
+	</ui:composition>
+
+
+</html>
