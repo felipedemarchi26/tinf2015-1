@@ -6,23 +6,14 @@ import javax.persistence.Query;
 
 import br.senai.sc.projeto.model.Produto;
 
-public class ProdutoDAO  extends DAO {
+public class ProdutoDAO  extends DAO<Produto> {
 
-	public void salvar(Produto produto) {
-		getEM().merge(produto);
-	}
-	
-	public void excluir(long id) {
-		Produto produto = getEM().getReference(Produto.class, id);
-		getEM().remove(produto);
-	}
-	
 	public Produto buscarPorId(long id) {
 		return getEM().find(Produto.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Produto> listarProdutos() {
+	public List<Produto> listarTodos() {
 		Query query = getEM().createQuery("SELECT p FROM Produto p");
 		return query.getResultList();
 	}

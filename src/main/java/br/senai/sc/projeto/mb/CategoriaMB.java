@@ -62,7 +62,7 @@ public class CategoriaMB {
 	}
 	
 	public String excluir() {
-		categoriaRN.excluir(categoria.getId());
+		categoriaRN.excluir(categoria);
 		categorias.remove(categoria);
 		categoria = new Categoria();
 		return null;

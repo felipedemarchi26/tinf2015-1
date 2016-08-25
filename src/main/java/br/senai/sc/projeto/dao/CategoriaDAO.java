@@ -6,25 +6,16 @@ import javax.persistence.Query;
 
 import br.senai.sc.projeto.model.Categoria;
 
-public class CategoriaDAO extends DAO {
+public class CategoriaDAO extends DAO<Categoria> {
 
-	public void salvar(Categoria categoria) {
-		getEM().merge(categoria);
-	}
-	
 	public Categoria buscarPorId(long id) {
 		return getEM().find(Categoria.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Categoria> listarCategorias() {
+	public List<Categoria> listarTodos() {
 		Query query = getEM().createQuery("SELECT c FROM Categoria c", Categoria.class);
 		return query.getResultList();
-	}
-	
-	public void excluir(long id) {
-		Categoria categoria = getEM().getReference(Categoria.class, id);
-		getEM().remove(categoria);
 	}
 	
 	@SuppressWarnings("unchecked")

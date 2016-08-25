@@ -11,8 +11,8 @@ public class ProdutoRN {
 		DAOFactory.getProdutoDAO().salvar(produto);
 	}
 	
-	public void excluir(long id) {
-		DAOFactory.getProdutoDAO().excluir(id);
+	public void excluir(Produto produto) {
+		DAOFactory.getProdutoDAO().excluir(produto);
 	}
 	
 	public Produto buscarPorId(long id) {
@@ -20,7 +20,7 @@ public class ProdutoRN {
 	}
 	
 	public List<Produto> listarProdutos() {
-		return DAOFactory.getProdutoDAO().listarProdutos();
+		return DAOFactory.getProdutoDAO().listarTodos();
 	}
 	
 }

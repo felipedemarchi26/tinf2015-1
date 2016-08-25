@@ -16,11 +16,11 @@ public class UsuarioRN {
 	}
 	
 	public List<Usuario> listarUsuario() {
-		return DAOFactory.getUsuarioDAO().listarUsuarios();
+		return DAOFactory.getUsuarioDAO().listarTodos();
 	}
 	
 	public void excluir(Usuario usuario) {
-		DAOFactory.getUsuarioDAO().excluir(usuario.getId());
+		DAOFactory.getUsuarioDAO().excluir(usuario);
 	}
 	
 }

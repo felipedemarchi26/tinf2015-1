@@ -16,11 +16,11 @@ public class CategoriaRN {
 	}
 	
 	public List<Categoria> listarCategorias() {
-		return DAOFactory.getCategoriaDAO().listarCategorias();
+		return DAOFactory.getCategoriaDAO().listarTodos();
 	}
 	
-	public void excluir(long id) {
-		DAOFactory.getCategoriaDAO().excluir(id);
+	public void excluir(Categoria categoria) {
+		DAOFactory.getCategoriaDAO().excluir(categoria);
 	}
 	
 	public List<Categoria> listarParaAutoComplete(String busca) {
