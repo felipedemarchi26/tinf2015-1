@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.senai.sc.projeto.model.Regra;
 import br.senai.sc.projeto.model.Usuario;
+import br.senai.sc.projeto.rn.RegraRN;
 import br.senai.sc.projeto.rn.UsuarioRN;
 
 @ManagedBean
@@ -16,12 +18,15 @@ public class UsuarioMB {
 
 	private Usuario usuario;
 	private UsuarioRN usuarioRN;
+	private RegraRN regraRN;
 	private String confirmarSenha;
 	private List<Usuario> usuarios;
+	private List<Regra> regras;
 
 	public UsuarioMB() {
 		usuario = new Usuario();
 		usuarioRN = new UsuarioRN();
+		regraRN = new RegraRN();
 		confirmarSenha = "";
 	}
 
@@ -60,6 +65,17 @@ public class UsuarioMB {
 		this.usuarios = usuarios;
 	}
 
+	public List<Regra> getRegras() {
+		if (regras == null) {
+			regras = regraRN.listarRegras();
+		}
+		return regras;
+	}
+
+	public void setRegras(List<Regra> regras) {
+		this.regras = regras;
+	}
+
 	public String salvar() {
 		if (usuario.getId() != 0 || usuario.getSenha().equals(confirmarSenha)) {
 			usuarioRN.salvar(usuario);
@@ -83,11 +99,11 @@ public class UsuarioMB {
 	
 	public String novo() {
 		usuario = new Usuario();
-		return "cadastroUsuario";
+		return "/cadastroUsuario";
 	}
 	
 	public String editar() {
-		return "cadastroUsuario";
+		return "/cadastroUsuario";
 	}
 	
 	public String excluir() {

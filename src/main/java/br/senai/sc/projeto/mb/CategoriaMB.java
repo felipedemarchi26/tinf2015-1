@@ -54,11 +54,11 @@ public class CategoriaMB {
 	}
 	
 	public String listar() {
-		return "listarCategorias";
+		return "/admin/listarCategorias";
 	}
 	
 	public String editar() {
-		return "cadastroCategoria";
+		return "/admin/cadastroCategoria";
 	}
 	
 	public String excluir() {
@@ -70,7 +70,7 @@ public class CategoriaMB {
 	
 	public String novo() {
 		categoria = new Categoria();
-		return "cadastroCategoria";
+		return "/admin/cadastroCategoria";
 	}
 	
 	

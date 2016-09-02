@@ -23,4 +23,8 @@ public class UsuarioRN {
 		DAOFactory.getUsuarioDAO().excluir(usuario);
 	}
 	
+	public Usuario buscarPorEmail(String email) {
+		return DAOFactory.getUsuarioDAO().buscarPorEmail(email);
+	}
+	
 }

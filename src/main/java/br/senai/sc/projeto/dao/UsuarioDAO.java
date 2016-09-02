@@ -18,4 +18,10 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return query.getResultList();
 	}
 	
+	public Usuario buscarPorEmail(String email) {
+		Query query = getEM().createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+		query.setParameter("email", email);
+		return (Usuario) query.getSingleResult();
+	}
+	
 }

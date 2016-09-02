@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/resources/templates/default.xhtml">
+	
+		<ui:define name="content">
+			<p:dialog header="Login" visible="true"
+				closable="false" draggable="false"
+				resizable="false" width="500">
+			
+				<center>
+					<h:outputText value="Usuário e/ou senha inválido!"
+					rendered="#{param.erro}"/>
+				</center>
+				
+				<h:form id="form" prependId="false">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="username" value="E-mail"/>
+							<p:inputText id="username" styleClass="form-control"
+								required="true" requiredMessage="E-mail obrigatório!"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="password" value="Senha"/>
+							<p:password id="password" styleClass="form-control"
+								required="true" requiredMessage="Senha obrigatória!"/>
+						</div>
+					</div>
+				</div>
+				<p:commandButton value="Entrar" ajax="false" 
+					action="#{loginManager.login}"/>
+				</h:form>
+			
+			</p:dialog>
+		</ui:define>
+	</ui:composition>
+</html>

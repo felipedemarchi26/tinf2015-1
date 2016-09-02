@@ -5,6 +5,7 @@ public class DAOFactory {
 	private static UsuarioDAO usuarioDAO;
 	private static CategoriaDAO categoriaDAO;
 	private static ProdutoDAO produtoDAO;
+	private static RegraDAO regraDAO;
 	
 	public static UsuarioDAO getUsuarioDAO() {
 		if (usuarioDAO == null) {
@@ -25,6 +26,13 @@ public class DAOFactory {
 			produtoDAO = new ProdutoDAO();
 		}
 		return produtoDAO;
+	}
+
+	public static RegraDAO getRegraDAO() {
+		if (regraDAO == null) {
+			regraDAO = new RegraDAO();
+		}
+		return regraDAO;
 	}
 	
 	

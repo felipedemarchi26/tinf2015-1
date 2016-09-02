@@ -1,12 +1,15 @@
 package br.senai.sc.projeto.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,11 +32,14 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private String senha;
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Endereco endereco;
+	@ManyToMany
+	private List<Regra> regras;
 
 	public Usuario() {
 		endereco = new Endereco();
+		this.regras = new ArrayList<Regra>();
 	}
 
 	public Usuario(long id, String nome, Date nascimento, String cpf, String rg, String telefone, String email,
@@ -119,6 +125,14 @@ public class Usuario {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Regra> getRegras() {
+		return regras;
+	}
+
+	public void setRegras(List<Regra> regras) {
+		this.regras = regras;
 	}
 
 	@Override
