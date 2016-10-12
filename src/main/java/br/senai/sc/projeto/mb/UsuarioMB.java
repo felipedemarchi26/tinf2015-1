@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.senai.sc.projeto.commons.Utils;
 import br.senai.sc.projeto.model.Regra;
 import br.senai.sc.projeto.model.Usuario;
 import br.senai.sc.projeto.rn.RegraRN;
@@ -78,6 +79,8 @@ public class UsuarioMB {
 
 	public String salvar() {
 		if (usuario.getId() != 0 || usuario.getSenha().equals(confirmarSenha)) {
+			String hash = Utils.senhaToSha256(usuario.getSenha());
+			usuario.setSenha(hash);
 			usuarioRN.salvar(usuario);
 			confirmarSenha = "";
 			usuarios = null;

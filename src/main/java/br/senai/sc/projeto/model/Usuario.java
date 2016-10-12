@@ -31,6 +31,7 @@ public class Usuario {
 	@Column(length = 14)
 	private String telefone;
 	private String email;
+	@Column(length=64)
 	private String senha;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Endereco endereco;
