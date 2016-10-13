@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/resources/templates/default.xhtml">
 		<ui:define name="title">Exemplo</ui:define>
@@ -12,6 +13,9 @@
 				<div id="jumb-index" class="jumbotron">
 					<h1>Index</h1>
 					<p>Este é apenas um exemplo de INDEX utilizando template!</p>
+					<h:form>
+						<p:commandLink value="Gerar PDF" action="#{pdfMB.gerarPdf()}" ajax="false" target="_blank"/>
+					</h:form>
 				</div>
 			</div>
 		</ui:define>
