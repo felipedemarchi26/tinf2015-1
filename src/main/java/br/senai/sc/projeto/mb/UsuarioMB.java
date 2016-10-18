@@ -1,13 +1,16 @@
 package br.senai.sc.projeto.mb;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import br.senai.sc.projeto.commons.Utils;
+import br.senai.sc.projeto.json.LoginJson;
 import br.senai.sc.projeto.model.Regra;
 import br.senai.sc.projeto.model.Usuario;
 import br.senai.sc.projeto.rn.RegraRN;
@@ -123,6 +126,49 @@ public class UsuarioMB {
 			return false;
 		}
 		return true;
+	}
+	
+	public void renderListaUsuariosJson() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		
+		String key = externalContext.getRequestParameterMap().get("key");
+		
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			json = Utils.getGson().toJson(usuarioRN.listarUsuariosParaJson());
+		}
+		
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
+	}
+	
+	public void renderLoginJson() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		
+		String email = externalContext.getRequestParameterMap().get("email");
+		String senha = externalContext.getRequestParameterMap().get("senha");
+		String key = externalContext.getRequestParameterMap().get("key");
+		
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			Usuario u = usuarioRN.loginParaJson(email, senha);
+			if (u != null) {
+				LoginJson lj = new LoginJson();
+				lj.setNome(u.getNome());
+				lj.setSucesso(true);
+				lj.setRegra("ROLE_USER");
+				json = Utils.getGson().toJson(lj);
+			}
+		}
+		
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
 	}
 
 }

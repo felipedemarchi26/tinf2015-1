@@ -24,4 +24,15 @@ public class UsuarioDAO extends DAO<Usuario> {
 		return (Usuario) query.getSingleResult();
 	}
 	
+	public Usuario loginParaJson(String email, String senha) {
+		Query query = getEM().createQuery("SELECT u FROM Usuario u  WHERE u.email = :email AND u.senha = :senha");
+		query.setParameter("email", email);
+		query.setParameter("senha", senha);
+		try {
+			return (Usuario) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 }
